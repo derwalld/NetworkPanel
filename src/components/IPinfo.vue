@@ -159,7 +159,6 @@ async function handleIP(ip: string) {
             const response = await fetch('https://pubstatic.b0.upaiyun.com/?_upnode', { referrerPolicy: 'no-referrer' });
             let resp = await response.json();
             ipInfo.local = await handleIP(resp['remote_addr'])
-            // ipInfo.local = resp
         } catch (error) {
             console.log(error)
         }
