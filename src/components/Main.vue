@@ -366,13 +366,13 @@ const checkUrl = async (url: string) => {
 
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 5000);
-    const response = await fetch(url, { cache: "no-store", mode: 'cors', referrerPolicy: 'no-referrer' ,signal: controller.signal})
+    const response = await fetch(url, { cache: "no-store", mode: 'no-cors', referrerPolicy: 'no-referrer' ,signal: controller.signal})
     if (response.status == 404) throw "资源响应异常" + response.status
-    if (!response.body) throw "资源响应异常 Nobody"
-    const reader = response.body.getReader();
-    const { value, done } = await reader.read();
-    if (!value || value.length <= 0) throw "资源响应异常 Nobody";
-    reader.cancel()
+    // if (!response.body) throw "资源响应异常 Nobody"
+    // const reader = response?.body.getReader();
+    // const { value, done } = await reader.read();
+    // if (!value || value.length <= 0) throw "资源响应异常 Nobody";
+    // reader.cancel()
   } catch (err) {
     status = false
     if (err instanceof Error) info = err.message
@@ -622,7 +622,7 @@ async function startThread(index: number) {
       return
     }
     let _url=solvedRunUrl
-    const response = await fetch(_url, { cache: "no-store", mode: 'cors', referrerPolicy: 'no-referrer' })
+    const response = await fetch(_url, { cache: "no-store", mode: 'no-cors', referrerPolicy: 'no-referrer' })
     if (!response.body) throw "Nobody"
     let contentLength = response.headers.get('content-length')
     let realLength = Infinity
